@@ -1,4 +1,3 @@
-
 val Scala212 = "2.12.15"
 val Scala213 = "2.13.7"
 
@@ -26,7 +25,9 @@ val commonSettings = Seq(
   sonatypeProfileName := "io.github.ghostbuster91",
   scalacOptions ~= (_.filterNot(Set("-Xfatal-warnings"))),
   testFrameworks += new TestFramework("utest.runner.Framework"),
-  addCompilerPlugin("org.scalameta" % "semanticdb-scalac" % "4.4.31" cross CrossVersion.full)
+  addCompilerPlugin(
+    ("org.scalameta" % "semanticdb-scalac" % "4.4.31").cross(CrossVersion.full)
+  )
 )
 
 lazy val rootProject = (project in file("."))
@@ -56,7 +57,7 @@ lazy val parser: Project = (project in file("parser"))
     crossScalaVersions := supportedScalaVersions,
     libraryDependencies ++= Seq(
       "io.swagger.parser.v3" % "swagger-parser" % "2.0.28",
-      "com.softwaremill.sttp.model" %% "core" % "1.4.18"
+      "com.softwaremill.sttp.model" %% "core" % "1.4.21"
     ) ++ testDependencies
   )
 
